@@ -1,6 +1,6 @@
 # Analysis of MACSJ 1752
 
-[Preliminary info](http://www.physics.ucdavis.edu/~dwittman/Table/MACS%20J1752.0+4440/home.html) from the Merging Cluster Collaboration
+[Summary](http://www.mergingclustercollaboration.org/macs-j175204440.html) of the system based on existing literature from the Merging Cluster Collaboration.
 
 
 # Coding standards 
