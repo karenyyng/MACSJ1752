@@ -23,10 +23,11 @@ Lower left corner  | 17:52:25 | 44:37:00 | 268.10416666666663 | 44.6166666666666
 Upper right corner | 17:51:48 | 44:43:30 | 267.95 | 44.770833   
 
 ```sh
-$ ftcopy 'I.fits[5608:8358, 5812:8561]' \!I_cropped.fits
-$ ftcopy 'R.fits[5599:8358, 5812:8561]' \!R_cropped.fits chatter=5
-$ ftcopy 'G.fits[5608:8358, 5812:8561]' \!G_cropped.fits chatter=5
+$ ftcopy 'I.fits[5608:8358, 5812:8562]' \!I_cropped.fits chatter=5
+$ ftcopy 'R.fits[5599:8349, 5812:8562]' \!R_cropped.fits chatter=5
+$ ftcopy 'G.fits[5608:8358, 5812:8562]' \!G_cropped.fits chatter=5
 ```
+Try to make the image to be squared: 2750
  
 |band | PIX X | PIX Y |  position | 
 |----|-----|------|--------|--------|
