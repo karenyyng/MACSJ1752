@@ -46,8 +46,8 @@
 	[order TBD]
 	M. J. James,$^{2}$
 	D. Wittman,$^{1}$
-	Nathan Golovich,$^{1}$
 	William A. Dawson,$^{3}$ 
+	\newauthor Nathan Golovich,$^{1}$
 }
 \begin{document}
 \date{arXiv} \pagerange{\pageref{firstpage}--\pageref{lastpage}}
@@ -56,17 +56,60 @@
 	
 \end{abstract}
 \begin{keywords}
-Galaxies: clusters: individual: MACS j1752.0+4440; Large-scale structure of
+Galaxies: clusters: individual: MACS J1752.0+4440; Large-scale structure of
 Universe;
 \end{keywords}
 \section{INTRODUCTION} 
 \section{DATA}
 \section{METHOD}
+
+
+\subsection{Number of subcluster components from optical analysis}
+We make use of the Extreme Deconvolution Gaussian Mixture Model (XDGMM) to
+determine the number of subclusters. This algorithm allows us to 
+1) get rid of the artificial imprint of the mask of the Keck
+DEIMOS spectrograph, 2) separate stars from galaxies, 3) separate
+foreground or background galaxies.  
+
+The features that we make use of are in the XDGMM include the half-light radius, $I_{iso}$,
+$G_{iso}$, $R_{iso} - I_{iso}$, etc. 
+
+It is customary to use more cluster than needed for high
+dimensional GMM then manually identify the relevant clusters (See Statistics,
+Data Mining and Machine Learning in Astronomy reference.)
+
+We further perform a weighted Kernel Density Estimation (KDE) from the
+identified clusters (Ng et al. 2015) to examine the number density
+peaks and the luminosity peaks.
+
+\subsection{LOS velocities of the subclusters}
+We continue to make use of the identification of cluster members from the XDGMM
+in this analysis, but we only make use of the member galaxies with secure
+spectroscopic redshift. 
+We use the biweight statistic to determine the location and the scale of
+the relative line-of-sight (LOS) velocities of the subclusters. A previous,
+less extensive use of the GMM has been shown by the ECGMM people.
+
+\subsection{Weak lensing analysis with LENSTOOL}
+To determine the source redshift of the lensed galaxies, we train a Random
+Forest regressor based on the data in the COSMOS field. 
+\section{RESULTS}
+\section{WL analysis}
+
+We cross validate our results by withholding 10\% of our source galaxies. 
+
+
+
+\section{Offset between the DM centroids and galaxy centroids}
 \section{DISCUSSION}
 \section{ACKNOWLEDGEMENTS}
+KN would like to thank Phil Marshall and Jake VanderPlas for their advice on the use of GMM and
+XDGMM during the AstroData Hack week 2014.
 
 \bibliographystyle{mn2e}
 \bibliography{MACS1752.bib}
 \appendix
+\section{MCMC diagnostics from the WL analysis}
+\section{Outputs from dynamical simulation}
 \clearpage\bsp\label{lastpage} 
 \end{document}
