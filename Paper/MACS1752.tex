@@ -39,15 +39,13 @@
 \title[
 	Awesome analysis of MACS1752 
 ]
-{
-	Awesome analysis of MACS1752
-}
+{Awesome analysis of MACS1752}
 \author[Karen Y. Ng et al.]{Karen Y. Ng,$^{1}$
 	[order TBD]
 	M. J. James,$^{2}$
 	D. Wittman,$^{1}$
 	William A. Dawson,$^{3}$ 
-	\newauthor Nathan Golovich,$^{1}$
+	\newauthor Nathan Golovich$^{1}$
 }
 \begin{document}
 \date{arXiv} \pagerange{\pageref{firstpage}--\pageref{lastpage}}
@@ -61,50 +59,97 @@ Universe;
 \end{keywords}
 \section{INTRODUCTION} 
 \section{DATA}
+\subsection{Keck DEIMOS Observations and Spectra Reduction}
+\begin{itemize}
+	\item Date and observation conditions
+	\item Refer to Will's 2014 paper for details of spectra reduction 
+\end{itemize}
+
+\subsection{Suburu / SuprimeCam Observation}
+Date and observation conditions
+
+\subsection{Hubble Space Telescope Observation} 
+Date and observation conditions
+
+\subsection{Data Reduction for Subaru and HST data}
+refer to James' CIZA paper
+
+\subsubsection{Extinction Correction}
+Very low extinction variation across the field 
+Dust correction (Schlafly \& Finkbeiner reference from CIZA paper 3.3) 
+Interpolation between the extinction piece points using Cubic interpolation?
+
+\subsubsection{Source selection and shape measurement}
+\begin{itemize}
+	\item S/N cuts - ellipticity error $< 0.3$ and detection significance $> 5\sigma$
+	\item K-correction?
+	\item Selection based on $(g-i)$ vs i band? 
+	\item Star galaxy separation based on half-light radius 
+	\item Source density counts   
+\end{itemize}
+
+\subsubsection{Source redshift estimation}
+Cosmic Evolution Survey photometric catalog (COSMOS) 
+Ilbert et al. 2009
+comparison of depth between our Subaru image and the COSMOS image?
+
 \section{METHOD}
 
+\subsection{Optical analysis}
+\subsubsection{Determining the number of galaxy subclusters and membership}
+\subsubsection{Brightest Cluster Galaxies identification (BCG)}
+\subsubsection{Number density and luminosity map}
 
-\subsection{Number of subcluster components from optical analysis}
-We make use of the Extreme Deconvolution Gaussian Mixture Model (XDGMM) to
-determine the number of subclusters. This algorithm allows us to 
-1) get rid of the artificial imprint of the mask of the Keck
-DEIMOS spectrograph, 2) separate stars from galaxies, 3) separate
-foreground or background galaxies.  
+% We make use of the Extreme Deconvolution Gaussian Mixture Model (XDGMM) to
+% determine the number of subclusters. This algorithm allows us to 
+% 1) get rid of the artificial imprint of the mask of the Keck
+% DEIMOS spectrograph, 2) separate stars from galaxies, 3) separate
+% foreground or background galaxies.  
+% 
+% The features that we make use of are in the XDGMM include the half-light radius, $I_{iso}$,
+% $G_{iso}$, $R_{iso} - I_{iso}$, etc. 
+% 
+% It is customary to use more cluster than needed for high
+% dimensional GMM then manually identify the relevant clusters (See Statistics,
+% Data Mining and Machine Learning in Astronomy reference.)
+% 
+% We further perform a weighted Kernel Density Estimation (KDE) from the
+% identified clusters (Ng et al. 2015) to examine the number density
+% peaks and the luminosity peaks.
 
-The features that we make use of are in the XDGMM include the half-light radius, $I_{iso}$,
-$G_{iso}$, $R_{iso} - I_{iso}$, etc. 
+\subsubsection{Dynamics of the subclusters}
+\begin{itemize}
+		\item LOS velocities
+		\item mass estimation from velocity dispersion 
+\end{itemize}
+% We continue to make use of the identification of cluster members from the XDGMM
+% in this analysis, but we only make use of the member galaxies with secure
+% spectroscopic redshift. 
+% We use the biweight statistic to determine the location and the scale of
+% the relative line-of-sight (LOS) velocities of the subclusters. A previous,
+% less extensive use of the GMM has been shown by the ECGMM people.
 
-It is customary to use more cluster than needed for high
-dimensional GMM then manually identify the relevant clusters (See Statistics,
-Data Mining and Machine Learning in Astronomy reference.)
+\subsection{Weak lensing analysis (WL) with LENSTOOL}
+% To determine the source redshift of the lensed galaxies, we train a Random
+% Forest regressor based on the data in the COSMOS field. 
 
-We further perform a weighted Kernel Density Estimation (KDE) from the
-identified clusters (Ng et al. 2015) to examine the number density
-peaks and the luminosity peaks.
 
-\subsection{LOS velocities of the subclusters}
-We continue to make use of the identification of cluster members from the XDGMM
-in this analysis, but we only make use of the member galaxies with secure
-spectroscopic redshift. 
-We use the biweight statistic to determine the location and the scale of
-the relative line-of-sight (LOS) velocities of the subclusters. A previous,
-less extensive use of the GMM has been shown by the ECGMM people.
+\subsection{Offset between the DM and galaxy centroids}
 
-\subsection{Weak lensing analysis with LENSTOOL}
-To determine the source redshift of the lensed galaxies, we train a Random
-Forest regressor based on the data in the COSMOS field. 
+\subsection{Setup of Dawson's dynamical simulation}
+\subsubsection{Weights due to radio relic info}
+
 \section{RESULTS}
-\section{WL analysis}
 
-We cross validate our results by withholding 10\% of our source galaxies. 
-
+% We cross validate our results by withholding 10\% of our source galaxies. 
 
 
-\section{Offset between the DM centroids and galaxy centroids}
+
 \section{DISCUSSION}
+\subsection{Offset between the DM centroids and galaxy centroids}
 \section{ACKNOWLEDGEMENTS}
-KN would like to thank Phil Marshall and Jake VanderPlas for their advice on the use of GMM and
-XDGMM during the AstroData Hack week 2014.
+% KN would like to thank Phil Marshall and Jake VanderPlas for their advice on the use of GMM and
+% XDGMM during the AstroData Hack week 2014.
 
 \bibliographystyle{mn2e}
 \bibliography{MACS1752.bib}
