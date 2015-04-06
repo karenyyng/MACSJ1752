@@ -42,7 +42,7 @@
 {Awesome analysis of MACS1752}
 \author[Karen Y. Ng et al.]{Karen Y. Ng,$^{1}$
 	[order TBD]
-	M. J. James,$^{2}$
+	M. James Jee,$^{2}$
 	D. Wittman,$^{1}$
 	William A. Dawson,$^{3}$ 
 	\newauthor Nathan Golovich$^{1}$
@@ -55,7 +55,25 @@
 \end{abstract}
 \begin{keywords}
 Galaxies: clusters: individual: MACS J1752.0+4440; Large-scale structure of
-Universe;
+Universe; methods: statistical 
+(PLEASE GIVE ME A REFEREE WHO KNOWS STATISTICAL And Machine learning)
+
+\begin{array}{<+dimension+>}
+	<+elements+>
+\end{array}
+\right<++>
+\begin{array}{<+dimension+>}
+	<+elements+>
+\end{array}
+\right<++>
+\begin{array}{<+dimension+>}
+	<+elements+>
+\end{array}
+\right<++>
+\begin{array}{<+dimension+>}
+	<+elements+>
+\end{array}
+\right<++>
 \end{keywords}
 \section{INTRODUCTION} 
 \section{DATA}
@@ -75,11 +93,20 @@ Date and observation conditions
 refer to James' CIZA paper
 
 \subsubsection{Extinction Correction}
-Very low extinction variation across the field 
-Dust correction (Schlafly \& Finkbeiner reference from CIZA paper 3.3) 
-Interpolation between the extinction piece points using Cubic interpolation?
+There is low extinction in the field of view of MACSJ1752. The mean of the extinction
+magnitude in E(B-V) is 0.036, while the standard deviation in the extinction
+magnitude is $8.5 \times 10^{-3}$ (ACCORDING TO WHOSE MAP?).
+We first perform cubic interpolation to infer the E(B-V) values at the spatial
+location of all the entries of our data catalog. Then we perform dust
+correction for other bands according to Schlafly \& Finkbeiner (reference from CIZA paper 3.3).
 
 \subsubsection{Source selection and shape measurement}
+We make use of a Random Forest algorithm to train a classifier of cluster
+member galaxies, source galaxies, and other contaminants such as stars
+and foreground galaxies.
+The predictors that we included in the Random Forest algorithm are all the
+colors and magnitudes that we have, the half-light radius,  
+
 \begin{itemize}
 	\item S/N cuts - ellipticity error $< 0.3$ and detection significance $> 5\sigma$
 	\item K-correction?
@@ -129,7 +156,7 @@ comparison of depth between our Subaru image and the COSMOS image?
 % the relative line-of-sight (LOS) velocities of the subclusters. A previous,
 % less extensive use of the GMM has been shown by the ECGMM people.
 
-\subsection{Weak lensing analysis (WL) with LENSTOOL}
+\subsection{Weak lensing (WL) analysis with LENSTOOL}
 % To determine the source redshift of the lensed galaxies, we train a Random
 % Forest regressor based on the data in the COSMOS field. 
 

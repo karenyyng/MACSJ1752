@@ -3,7 +3,10 @@
 [Summary](http://www.mergingclustercollaboration.org/macs-j175204440.html) of the system based on existing literature from the Merging Cluster Collaboration.
 
 
-# Coding standards 
+# Usage 
+If you use any part of this repo, please cite Ng et al. (in prep.).
+
+# Contributing - Coding standards 
 We adopt the the testing standards from `AstroPy` and use `py.test`. 
 And please follow the Python coding style guide [`PEP8`](https://www.python.org/dev/peps/pep-0008/)
 If you do not know what `PEP8` is, run your code through
