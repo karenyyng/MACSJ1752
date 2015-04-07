@@ -56,24 +56,6 @@
 \begin{keywords}
 Galaxies: clusters: individual: MACS J1752.0+4440; Large-scale structure of
 Universe; methods: statistical 
-(PLEASE GIVE ME A REFEREE WHO KNOWS STATISTICAL And Machine learning)
-
-\begin{array}{<+dimension+>}
-	<+elements+>
-\end{array}
-\right<++>
-\begin{array}{<+dimension+>}
-	<+elements+>
-\end{array}
-\right<++>
-\begin{array}{<+dimension+>}
-	<+elements+>
-\end{array}
-\right<++>
-\begin{array}{<+dimension+>}
-	<+elements+>
-\end{array}
-\right<++>
 \end{keywords}
 \section{INTRODUCTION} 
 \section{DATA}
@@ -94,25 +76,56 @@ refer to James' CIZA paper
 
 \subsubsection{Extinction Correction}
 There is low extinction in the field of view of MACSJ1752. The mean of the extinction
-magnitude in E(B-V) is 0.036, while the standard deviation in the extinction
-magnitude is $8.5 \times 10^{-3}$ (ACCORDING TO WHOSE MAP?).
+magnitude in E(B-V) is 0.036, while the corresponding standard deviation 
+is $8.5 \times 10^{-3}$ (ACCORDING TO WHOSE MAP?).
 We first perform cubic interpolation to infer the E(B-V) values at the spatial
 location of all the entries of our data catalog. Then we perform dust
 correction for other bands according to Schlafly \& Finkbeiner (reference from CIZA paper 3.3).
 
-\subsubsection{Source selection and shape measurement}
-We make use of a Random Forest algorithm to train a classifier of cluster
-member galaxies, source galaxies, and other contaminants such as stars
-and foreground galaxies.
-The predictors that we included in the Random Forest algorithm are all the
-colors and magnitudes that we have, the half-light radius,  
+\subsubsection{Shape measurement and source selection}
+[I may just move all these to a new paper and stick with a quick-and-dirty
+approach]
+We make use of two state-of-the-art classification / regression algorithms,
+gradient boosting trees and a Random Forest algorithm,
+to select our source and obtained consistent results. 
+Data cleaning, preprocessing and feature engineering have always been considered to
+be one of the most important steps in a data analysis (quote Machine learning
+paper). 
+
+The predictors that we included in the classification algorithms are all the
+colors and magnitudes that we have, the half-light radius, identification
+status flag and the redshift. 
+The class labels in the predictions are 
+member galaxies, source galaxies, and other contaminants such as stars,
+foreground galaxies, and unidentifiable contaminants with problematic status
+flags.
+
+To minimize misclassification rates, we discarded samples with classification
+probability less than 0.5 in the dominant classification. 
+
+We make use of stratefied cross validation to find a  
+training error rate is 
+test error rate is .
+
+The false positive rate from the out-of-bag samples is .
+
+After obtaining the source population, 
+we perform signal-to-noise ratio (SNR) cuts to make sure the ellipticity errors are $< 0.3$ 
+and the SNR are $>5$.
+
+The resulting source density count from our cleaned catalog is , which is
+within $\sigma$ of the source density count of the training COSMOS fields
+catalog after removing stars and foreground galaxies.  
+Finally, the effective lensing depth $\beta$, i.e. the mean of $D_{LS} / D{L}$[DOUBLE
+CHECK] etc. of the inferred source population is .  
+
 
 \begin{itemize}
-	\item S/N cuts - ellipticity error $< 0.3$ and detection significance $> 5\sigma$
-	\item K-correction?
+	\item K-correction? (not needed)
 	\item Selection based on $(g-i)$ vs i band? 
 	\item Star galaxy separation based on half-light radius 
 	\item Source density counts   
+	\item S/N cuts - ellipticity error $< 0.3$ and detection significance $> 5\sigma$
 \end{itemize}
 
 \subsubsection{Source redshift estimation}
