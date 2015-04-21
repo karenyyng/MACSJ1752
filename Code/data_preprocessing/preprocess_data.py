@@ -1,4 +1,8 @@
 """astro functions for performing derredening"""
+from __future__ import (division, print_function, unicode_literals)
+from collections import OrderedDict
+from astropy.io import fits
+import pandas as pd
 
 
 def Schlafly_dereddening(band, E_B_minus_V, band_name, R_V=3.1):
@@ -24,3 +28,18 @@ def Schlafly_dereddening(band, E_B_minus_V, band_name, R_V=3.1):
         raise NotImplementedError("Currently supported band_name = 'g', 'r'" +
                                   " or 'i'")
     return
+
+
+def fits_cat_to_h5(dataPath):
+    """
+    path = string, full path to Subaru fits catalog
+
+    """
+    cats = OrderedDict({band: fits.open(dataPath + "{0}.cat".format(band))
+                        for band in ["I", "R", "G"]})
+    df_list = OrderedDict({band: pd.DataFrame(cats[band][2].data.tolist(),
+                           columns=cats[band][2].data.dtype.names)
+                           for band in cats.keys()})
+    for band in df_list.keys():
+        df_list[band].to_hdf(dataPath + "preprocessed_subaru_cat.h5",
+                             band + "_data")
