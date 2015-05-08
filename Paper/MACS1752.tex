@@ -21,6 +21,7 @@
 \graphicspath{{graphics/}}
 \newcommand{\mc}[1]{\multicolumn{1}{c}{#1}} % handy shortcut macro
 %-----------------------------------------------------------------------
+\def\code#1{\texttt{#1}}
 \def\apjl{ApJL }
 \def\aj{AJ }
 \def\apj{ApJ }
@@ -42,9 +43,9 @@
 {Awesome analysis of MACS1752}
 \author[Karen Y. Ng et al.]{Karen Y. Ng,$^{1}$
 	[order TBD]
-	M. James Jee,$^{2}$
 	D. Wittman,$^{1}$
 	William A. Dawson,$^{3}$ 
+	M. James Jee,$^{2}$
 	\newauthor Nathan Golovich$^{1}$
 }
 \begin{document}
@@ -80,11 +81,54 @@ magnitude in E(B-V) is 0.036, while the corresponding standard deviation
 is $8.5 \times 10^{-3}$ (ACCORDING TO WHOSE MAP?).
 We first perform cubic interpolation to infer the E(B-V) values at the spatial
 location of all the entries of our data catalog. Then we perform dust
-correction for other bands according to \cite{Schlafly2010}.
+correction for other the G, R and I Subaru bands according to \cite{Schlafly2010}.
+
+\begin{itemize}
+\item Source count
+\end{itemize}
+
 
 \subsubsection{Shape measurement and source selection}
+We perform a series of manual cuts to remove spurious data points that cannot 
+belong to the source population.
+we perform signal-to-noise ratio (SNR) cuts to make sure the ellipticity errors are $< 0.3$ 
+and the SNR are $>5$.
+
+The resulting source density count from our cleaned catalog is , which is
+within $\sigma$ of the source density count of the training COSMOS fields
+catalog after removing stars and foreground galaxies.  
+Finally, the effective lensing depth $\beta$, i.e. the mean of $D_{LS} / D{L}$[DOUBLE
+CHECK] etc. of the inferred source population is .  
+
+
+Determine stellar locus
+Fig. 6 Dawson et al. 2014 $I_{auto} vs Half-light radius$ plot!!!
+
+\begin{table}
+	\caption{Criteria used for source selection to prevent spurious sources.} 
+\begin{center} 
+\begin{tabular}{@{}lc}
+\toprule Property & Criteria \\ \toprule
+R-band magnitude (ISO and AUTO)  & $21 <  R < 25$ \\
+Ellipticity measurement error & $\delta e < 0.25$ \\
+Semi-minor axis & $b > 0.4$ pixels \\
+Elliptical Gaussian fitting convergence & \code{STATUS} = 1\\
+Significance cut in G,R I band (ISO) & \code{MAG}\_{\code{ISO}} /
+\code{MAG}\_\code{ERR}\_{\code{ISO}} $>$ 5 \\ 
+I band SexTractor star flag& \code{CLASS\_STAR} $ < 0.6$ \\
+I band half-light radius & \code{I\_FLUX\_RADIUS} $ > 2.3$ pixels\\
+SexTractor FLAG cut & \code{FLAG} $\neq 8, 16, 32$\\
+\bottomrule
+\end{tabular} 
+\end{center} 
+\label{tab:cuts} 
+\end{table} 
 [I may just move all these to a new paper and stick with a quick-and-dirty
 approach]
+
+
+
+After obtaining the source population. 
 We make use of two state-of-the-art classification / regression algorithms,
 gradient boosting trees and a Random Forest algorithm,
 to select our source and obtained consistent results. 
@@ -109,23 +153,11 @@ test error rate is .
 
 The false positive rate from the out-of-bag samples is .
 
-After obtaining the source population, 
-we perform signal-to-noise ratio (SNR) cuts to make sure the ellipticity errors are $< 0.3$ 
-and the SNR are $>5$.
-
-The resulting source density count from our cleaned catalog is , which is
-within $\sigma$ of the source density count of the training COSMOS fields
-catalog after removing stars and foreground galaxies.  
-Finally, the effective lensing depth $\beta$, i.e. the mean of $D_{LS} / D{L}$[DOUBLE
-CHECK] etc. of the inferred source population is .  
-
-
 \begin{itemize}
 	\item K-correction? (not needed)
-	\item Selection based on $(g-i)$ vs i band? 
+	\item Selection based on $(r-i)$ vs i band? 
 	\item Star galaxy separation based on half-light radius 
 	\item Source density counts   
-	\item S/N cuts - ellipticity error $< 0.3$ and detection significance $> 5\sigma$
 \end{itemize}
 
 \subsubsection{Source redshift estimation}

@@ -1,7 +1,8 @@
 # Relevant processed data files    
 * combined_cat.h5  
-  * includes combined preprocessed dataframe with the key `df` and 
-  * semi-processed processed dataframe for sources with the key
-  `processed_df_w_shape_n_star_cuts` this also includes a cut to zoom-in on
-relevant area, and `E(B-V)` from interpolation 
+  * `preprocess_df` - contains minimal sets of combined catalog in a df
+  * zero point adjustment
+  * deredden magnitudes 
+
+
 
