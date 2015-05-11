@@ -8,18 +8,21 @@ from __future__ import (division, print_function, unicode_literals)
 from collections import OrderedDict
 import numpy as np
 from astropy.io import fits
+from astropy.coordinates import SkyCoord
 import pandas as pd
 
 
-def calculate_FoV_area(wcs_coords):
-    if len(wcs_coords) != 4:
-        raise ValueError("Inputs need to be a list of 4 sets of corner coords")
+def calculate_source_count_per_sq_arcmin(lower_left_wcs, upper_right_wcs,
+                                         count_in_area):
+    if len(lower_left_wcs) != 2 or len(upper_right_wcs) != 2:
+        raise ValueError("Inputs need to contain 2 strings of RA and DEC")
+    lower_left = SkyCoord(lower_left_wcs[0], lower_left_wcs[1])
+    upper_right = SkyCoord(upper_right_wcs[0], upper_right_wcs[1])
 
-    return
+    arcmin_sq = np.abs(lower_left.dec.degree - upper_right.dec.degree) * 60 * \
+                np.abs(lower_left.ra.degree - upper_right.ra.degree) * 60
 
-
-def source_per_arcmin(df, keys):
-    return
+    return count_in_area / arcmin_sq
 
 
 def Schlafly_dereddening(band, E_B_minus_V, band_name, R_V=3.1):
@@ -47,6 +50,38 @@ def Schlafly_dereddening(band, E_B_minus_V, band_name, R_V=3.1):
                                   " or 'i'")
 
     return band - redden_coeff * E_B_minus_V
+
+
+def match_catalog(tree_x, tree_y, query_x, query_y, k_neighbor=1):
+    """ we make use of scipy.spatial.KDTree.query to
+    build a KD tree from tree_x and tree_y coordinates
+    then query the nearest neighbor of query_x and query_y
+
+    :param tree_x: numpy array,
+    :param tree_y: numpy array, same length as tree_x
+    :param query_x: numpy array
+    :param query_y: numpy array, same length as query_x
+
+    :note: make sure tree_x, tree_y has same units as query_x and query_y
+
+    :return: [distance, nearest_neighbor_index]
+    """
+    from scipy import spatial
+    # cast everything as a numpy array first
+    tree_x = np.array(tree_x)
+    tree_y = np.array(tree_y)
+    query_x = np.array(query_x)
+    query_y = np.array(query_y)
+
+    if len(tree_x) != len(tree_y):
+        raise ValueError("Dimension mismatch between tree_x and tree_y")
+    if len(query_x) != len(query_y):
+        raise ValueError("Dimension mismatch between query_x and query_y")
+
+    tree = spatial.KDTree(np.array([tree_x, tree_y]).transpose())
+    pts = np.array([query_x, query_y]).transpose()
+
+    return tree.query(pts)
 
 # -------cluster specific utility --------------------
 

@@ -38,9 +38,9 @@
 \providecommand{\ISBN}[1]{\href{http://cosmologist.info/ISBN/#1}{ISBN: #1}} 
 %-----------------------------------------------------------------------
 \title[
-	Awesome analysis of MACS1752 
+	$MC^2$ Awesome analysis of MACS1752 
 ]
-{Awesome analysis of MACS1752}
+{$MC^2$ Awesome analysis of MACS1752}
 \author[Karen Y. Ng et al.]{Karen Y. Ng,$^{1}$
 	[order TBD]
 	D. Wittman,$^{1}$
@@ -72,6 +72,16 @@ Date and observation conditions
 \subsection{Hubble Space Telescope Observation} 
 Date and observation conditions
 
+
+\subsection{Data Reduction for Keck DEIMOS data}
+%% refer to Dawson 2015 Ciza paper section 2.1.2 
+We made use of the same data reduction packages, {\it spec2d}
+and {\it spec1d} packages \citep{Newman2013} and a similar reduction procedure
+as \cite{Dawson2015}. During our visual inspection,  we adopted the same 
+quality rankings for our spectra as \cite{Newman2013}. This results in 
+357 objects with highest quality ranking ($Q=4$), and 40 objects with the
+minimum quality spectra.  
+
 \subsection{Data Reduction for Subaru and HST data}
 refer to James' CIZA paper
 
@@ -79,7 +89,7 @@ refer to James' CIZA paper
 There is low extinction in the field of view of MACSJ1752. The mean of the extinction
 magnitude in E(B-V) is 0.036, while the corresponding standard deviation 
 is $8.5 \times 10^{-3}$ (ACCORDING TO WHOSE MAP?).
-We first perform cubic interpolation to infer the E(B-V) values at the spatial
+We first perform interpolation to infer the E(B-V) values at the spatial
 location of all the entries of our data catalog. Then we perform dust
 correction for other the G, R and I Subaru bands according to \cite{Schlafly2010}.
 
@@ -111,13 +121,13 @@ Fig. 6 Dawson et al. 2014 $I_{auto} vs Half-light radius$ plot!!!
 \toprule Property & Criteria \\ \toprule
 R-band magnitude (ISO and AUTO)  & $21 <  R < 25$ \\
 Ellipticity measurement error & $\delta e < 0.25$ \\
-Semi-minor axis & $b > 0.4$ pixels \\
+I band semi-minor axis & $b > 0.4$ pixels \\
 Elliptical Gaussian fitting convergence & \code{STATUS} = 1\\
-Significance cut in G,R I band (ISO) & \code{MAG}\_{\code{ISO}} /
+Significance cut in G,R and I band (ISO) & \code{MAG}\_{\code{ISO}} /
 \code{MAG}\_\code{ERR}\_{\code{ISO}} $>$ 5 \\ 
-I band SexTractor star flag& \code{CLASS\_STAR} $ < 0.6$ \\
+I band SExTractor star flag& \code{CLASS\_STAR} $ < 0.6$ \\
 I band half-light radius & \code{I\_FLUX\_RADIUS} $ > 2.3$ pixels\\
-SexTractor FLAG cut & \code{FLAG} $\neq 8, 16, 32$\\
+SExTractor FLAG cut & \code{FLAG} $\neq 8, 16, 32$\\
 \bottomrule
 \end{tabular} 
 \end{center} 
