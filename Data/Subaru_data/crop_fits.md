@@ -1,5 +1,10 @@
 # See wiki for software needed for image processing tasks 
 
+
+# need to center the cut at :
+center: RA=17h52m06.0 DEC=+44d41m00.0s
+radius: 15 arcmin
+
 # command for examining `FITS` header 
 ```sh
 $ head -1 'FITSNAME' | fold -s -w 80
@@ -12,7 +17,7 @@ $ funpack stuff.fits.fz
 ```
 
 
-# WCS coordinates for cropping the image 
+# WCS coordinates for cropping the image - try 1 
 Crop only the region showed in the [van Weeren et al. 2012
 paper](http://arXiv.org/1206.2294) 
 
