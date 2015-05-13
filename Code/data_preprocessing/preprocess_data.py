@@ -81,7 +81,8 @@ def match_catalog(tree_x, tree_y, query_x, query_y, k_neighbor=1):
     tree = spatial.KDTree(np.array([tree_x, tree_y]).transpose())
     pts = np.array([query_x, query_y]).transpose()
 
-    return tree.query(pts)
+    # we use Euclidean distance, p=2
+    return tree.query(pts, p=2)
 
 # -------cluster specific utility --------------------
 
