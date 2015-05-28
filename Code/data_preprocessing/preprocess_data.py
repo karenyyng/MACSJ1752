@@ -52,7 +52,8 @@ def Schlafly_dereddening(band, E_B_minus_V, band_name, R_V=3.1):
     return band - redden_coeff * E_B_minus_V
 
 
-def match_catalog(tree_x, tree_y, query_x, query_y, k_neighbor=1):
+def match_catalog(tree_x, tree_y, query_x, query_y, k_neighbor=1, p=2,
+                  distance_upper_bound=1e8):
     """ we make use of scipy.spatial.KDTree.query to
     build a KD tree from tree_x and tree_y coordinates
     then query the nearest neighbor of query_x and query_y
@@ -61,6 +62,13 @@ def match_catalog(tree_x, tree_y, query_x, query_y, k_neighbor=1):
     :param tree_y: numpy array, same length as tree_x
     :param query_x: numpy array
     :param query_y: numpy array, same length as query_x
+    :param k_neighbor: (optional) int
+        how many neighbors you would like to return for each supplied query
+        point
+    :param p: (optional) integer
+        the norm to use to compute distance, 1-Manhattan distance, 2-Euclidean
+    :param distance_upper_bound: (optional)
+
 
     :note: make sure tree_x, tree_y has same units as query_x and query_y
 
@@ -82,7 +90,8 @@ def match_catalog(tree_x, tree_y, query_x, query_y, k_neighbor=1):
     pts = np.array([query_x, query_y]).transpose()
 
     # we use Euclidean distance, p=2
-    return tree.query(pts, p=2)
+    return tree.query(pts, p=2, k=k_neighbor,
+                      distance_upper_bound=distance_upper_bound)
 
 # -------cluster specific utility --------------------
 
